@@ -1,0 +1,34 @@
+.chatbot-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 600px; 
+    overflow: auto; 
+}
+
+.chat-input {
+    width: calc(100% - 40px);
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.message {
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.user {
+    background-color: black;
+    align-self: flex-end;
+}
+
+.bot {
+    background-color: black;
+    align-self: flex-start;
+}
