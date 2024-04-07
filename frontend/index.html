@@ -111,6 +111,7 @@
         .btn-submit-feedback:hover {
             background-color: #0a264a;
         }
+        
 
         /* New CSS for fade-in effect */
         .fade-in {
@@ -128,6 +129,69 @@
                 opacity: 1;
             }
         }
+
+
+        
+
+/*loader animation */
+.loader{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #ffffff;
+	transition: opacity 0.75s, visibility 0.75s;
+	z-index: 9;
+}
+.loader-hidden{
+	opacity: 0;
+	visibility: hidden;
+}
+.loader h1 {
+	position: absolute;
+	font-size: 100%;
+	font-weight: lighter;
+ 
+
+	top: 20rem;
+	z-index: 10;
+}
+.loader::after{
+	content:"";
+	width: 60vw;
+	height: 0.2vw;
+	background-image: linear-gradient(to right, black, lightgrey, black);
+	border-radius: 10px;
+	/* box-shadow: 0 0 5px 5px rgba(185, 230, 255, 0.86), 0 0 10px 10px rgba(44, 150, 255, 0.66), 0 0 20px 20px rgba(0, 81, 255, 0.38);
+	 */
+	animation: loading 1.5s ;
+}
+
+
+
+@keyframes loading{
+	from{
+		transform: scaleX(0%);
+		offset-anchor: 100%;
+	}
+	to{
+		transform: scaleX(100%);
+	}
+}
+
+@keyframes loading2{
+	from{
+		transform: scaleX(0%)
+	}
+	to{
+		transform: scaleX(100%)
+	}
+}
+
     </style>
 </head>
 <body>
@@ -156,6 +220,11 @@
         <div id="responseContainer"></div>
         <input type="text" id="feedback" class="feedback-input" placeholder="Enter your feedback here">
         <button class="btn-submit-feedback" onclick="submitFeedback()">Submit Feedback</button>
+    </div>
+
+    <div class="loader">
+        <h1>L O A D I N G</h1>
+        <img src="ArcTry Logo.jpeg"  style="position: absolute; top: 40%;  scale: 10%;">
     </div>
 
     <script>
@@ -251,5 +320,6 @@
             });
         }
     </script>
+    <script src="loader.js"></script>
 </body>
 </html>
