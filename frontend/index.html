@@ -18,46 +18,55 @@
             height: 100vh;
         }
         .container {
+            height: 300px;
+            width: 600px;       
             text-align: center;
             position: relative;
-            background-color: #fff; /* Increased opacity */
-            padding: 40px; /* Increased padding */
+            background-color: #fff;
+            margin-left: 100px;
+            align-items: center;
             border-radius: 10px;
-            max-width: 80%;
-            width: 500px; /* Increased width for better spacing */
-            margin-left: 50px; /* Added margin between container and product container */
+            padding-top: 100px;
         }
         .product-info-container, .dissatisfied-container {
+            height: 400px;
+            width: 570px;
             background-color: #fff; /* Increased opacity */
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
             display: none; /* Initially hide the container */
+            border-radius: 10px;
+            padding-left: 30px;
+        }
+        .dissatisfied-container {
+            margin-left: 100px; /* Add margin to the left of dissatisfied-container */
+        }
+        .dissatisfied-container .question {
+            margin-top: 80px; /* Add margin to the left of the question within dissatisfied-container */
         }
         .product-info-container {
+            height: 400px;
+            width: 600px;    
             display: flex;
             align-items: center;
-            margin-right: 50px; /* Added margin between product container and container */
+            border-radius: 10px;
         }
         .product-info {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             flex: 1; /* Added to allow flexibility */
+            padding-left: 20px;
         }
         .product-image {
             width: 250px; /* Adjusted width */
             height: auto;
-            margin-right: 20px;
+            align-items: center;
         }
         .product-details {
             text-align: left;
-            margin-top: 10px; /* Added margin for better spacing */
         }
         .question {
             /* font-family: Arial, sans-serif; */
             font-size: 24px;
-            margin-bottom: 20px;
             color: #000;
             font-weight: bold; /* Added font weight */
             opacity: 1; /* Added initial opacity */
@@ -128,6 +137,66 @@
                 opacity: 1;
             }
         }
+
+        /*loader animation */
+.loader{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #ffffff;
+	transition: opacity 0.75s, visibility 0.75s;
+	z-index: 9;
+}
+.loader-hidden{
+	opacity: 0;
+	visibility: hidden;
+}
+.loader h1 {
+	position: absolute;
+	font-size: 100%;
+	font-weight: lighter;
+ 
+
+	top: 20rem;
+	z-index: 10;
+}
+.loader::after{
+	content:"";
+	width: 60vw;
+	height: 0.3vw;
+	background-image: linear-gradient(to right, black, lightgrey, black);
+	border-radius: 10px;
+	/* box-shadow: 0 0 5px 5px rgba(185, 230, 255, 0.86), 0 0 10px 10px rgba(44, 150, 255, 0.66), 0 0 20px 20px rgba(0, 81, 255, 0.38);
+	 */
+	animation: loading 1.5s ;
+}
+
+
+
+@keyframes loading{
+	from{
+		transform: scaleX(0%);
+		offset-anchor: 100%;
+	}
+	to{
+		transform: scaleX(100%);
+	}
+}
+
+@keyframes loading2{
+	from{
+		transform: scaleX(0%)
+	}
+	to{
+		transform: scaleX(100%)
+	}
+}
+
     </style>
 </head>
 <body>
@@ -157,6 +226,9 @@
         <input type="text" id="feedback" class="feedback-input" placeholder="Enter your feedback here">
         <button class="btn-submit-feedback" onclick="submitFeedback()">Submit Feedback</button>
     </div>
+    <div class="loader">
+        <img src="ArcTry Logo.jpeg"  style="position: absolute; top: 40%;  scale: 10%;">
+        <h1>L O A D I N G</h1>
 
     <script>
         function handleYes() {
@@ -178,8 +250,8 @@
         }
 
         function handleNo() {
-            document.getElementById('container').style.display = "none";
-            document.getElementById('dissatisfied-container').style.display = "block";
+        document.getElementById('container').style.display = "none";
+        document.getElementById('dissatisfied-container').style.display = "block"; // Show the container
         }
 
         function handlePurchase() {
@@ -198,7 +270,7 @@
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Feedback submitted successfully!');
+                   // alert('Feedback submitted successfully!');
                     return data = response.json();
                 } else {
                     alert('Failed to submit feedback. Please try again later.');
@@ -251,5 +323,6 @@
             });
         }
     </script>
+    <script src="loader.js"></script>
 </body>
 </html>
