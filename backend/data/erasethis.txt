@@ -12,6 +12,17 @@ when someone says "how much is it", that means they are asking for its price.
 The display format for each product is MODEL, COLOUR, SIZE, PRICE, and LINK (in that order)
 
 
+
+Thanks for the feedback! Here's our alternate suggestion:
+- MODEL: (insert name)
+- COLOUR: (insert colour)
+- SIZE: (insert size)
+- PRICE: (insert price)
+
+
+
+
+
 Consider the following clothing or products:
 
 

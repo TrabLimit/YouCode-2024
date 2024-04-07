@@ -133,6 +133,7 @@
 
     <div class="dissatisfied-container" id="dissatisfied-container">
         <div class="question">Why were you dissatisfied with the product?</div>
+        <div id="responseContainer"></div>
         <input type="text" id="feedback" class="feedback-input" placeholder="Enter your feedback here">
         <button class="btn-submit-feedback" onclick="submitFeedback()">Submit Feedback</button>
     </div>
@@ -174,7 +175,14 @@
             })
             .then(data => {
                 console.log(data);
+                // Simulated response.text
+                const responseText = data.text;
                 
+                // Get a reference to the container element in your HTML
+                const responseContainer = document.getElementById('responseContainer');
+                // Update the content of the container with the response text
+                responseContainer.innerText = responseText;
+
             })
             .catch(error => {
                 console.error('Error submitting feedback:', error);

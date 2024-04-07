@@ -80,7 +80,7 @@ def feedbackRespond():
     data = request.get_json()
     feedbackText = data['feedback']
 
-    query = "The client doesn't like" + product.split("\n")[0].split(":")[1] + " due to: " + feedbackText + ". Is there a product that doesn't have this problem? Recommend a product and give its name, color, size, and link. If you can't find any, just recommend some similar (but not the same) product.\n"
+    query = "The client doesn't like" + product.split("\n")[0].split(":")[1] + " due to: " + feedbackText + ". Is there a product that doesn't have this problem? Recommend a product and give its name, color, size, and link. The last sentence should just be the URL link. If you can't find any, just recommend some similar (but not the same) product.\n"
     
     print(query)
 
