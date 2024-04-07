@@ -177,11 +177,44 @@
                 console.log(data);
                 // Simulated response.text
                 const responseText = data.text;
-                
-                // Get a reference to the container element in your HTML
-                const responseContainer = document.getElementById('responseContainer');
+
+let urlIndex = responseText.indexOf('https://');
+
+if (urlIndex !== -1) {
+     // Extract the URL
+     let url = responseText.slice(urlIndex);
+    // Extract the remaining string before the URL
+    let remainingString = responseText.slice(0, urlIndex).trim();
+
+    console.log("URL:", url);
+    console.log("Remaining String:", remainingString);
+
+    // Get a reference to the container element in your HTML
+    const responseContainer = document.getElementById('responseContainer');
+    // Clear the container
+    responseContainer.innerHTML = '';
+    // Create a span element for the remaining string
+    const remainingSpan = document.createElement('span');
+    remainingSpan.innerText = remainingString;
+    // Append the remaining string to the container
+    responseContainer.appendChild(remainingSpan);
+    // Add a line break
+    responseContainer.appendChild(document.createElement('br'));
+    // Create an anchor element for the URL
+    const urlLink = document.createElement('a');
+    urlLink.href = url;
+    urlLink.innerText = url;
+    // Append the URL as a hyperlink to the container
+    responseContainer.appendChild(urlLink);
+} else {
+    console.log("No URL found in the string.");
+    // Get a reference to the container element in your HTML
+    const responseContainer = document.getElementById('responseContainer');
                 // Update the content of the container with the response text
-                responseContainer.innerText = responseText;
+    responseContainer.innerText = responseText;
+}
+                
+                
 
             })
             .catch(error => {
