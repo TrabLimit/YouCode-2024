@@ -17,15 +17,9 @@ else:
     query = input("Enter your query: ")
 
 
-loader = TextLoader("/Users/Lemon/Desktop/Coding/YouCode-2024/backend/data/product_textfiles/Acrux_AR_Mountaineering_Boot.txt")
+loader = TextLoader("data.txt")
 index = VectorstoreIndexCreator().from_loaders([loader])
 
-while True:
-    query = input("You: ")
-
-    if query.lower() == "stop":
-        print("Goodbye!")
-        break
 
 print(index.query(query))
 
