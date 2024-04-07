@@ -51,13 +51,14 @@
             margin-top: 10px; /* Added margin for better spacing */
         }
         .question {
-            font-family: Arial, sans-serif;
+            /* font-family: Arial, sans-serif; */
             font-size: 24px;
             margin-bottom: 20px;
             color: #000;
+            font-weight: bold; /* Added font weight */
         }
         .btn {
-            padding: 20px 40px;
+            padding: 20px 60px;
             font-size: 22px;
             margin: 0 10px;
             cursor: pointer;
@@ -69,6 +70,9 @@
         }
         .btn:hover {
             background-color: #0a264a;
+        }
+        .btn.no {
+            margin-left: 50px; /* Added margin between Yes and No buttons */
         }
         .logo {
             position: absolute;
@@ -86,29 +90,35 @@
         <div class="product-info">
             <h2>CONDUIT DOWN JACKET WOMEN'S</h2>
             <p class="product-details">
-                Outstanding warmth in a versatile, cropped Conduit profile.<br>
-                COLOUR: Halogen<br>
-                YEAR: 2022<br>
-                SIZE: L<br>
-                CONDITION: EXCELLENT
+                Outstanding warmth in a versatile, cropped Conduit profile.<br><br>
+                COLOUR: <strong>Halogen</strong><br><br>
+                YEAR: <strong>2022</strong><br><br>
+                SIZE: <strong>L</strong><br><br>
+                CONDITION: <strong>EXCELLENT</strong>
             </p>
         </div>
     </div>
-    <div class="container">
-        <div class="question">Are you satisfied with the product you rented?</div>
+    <div class="container" id="container">
+        <div class="question">Were you satisfied with your rental?</div><br>
         <button class="btn" onclick="handleYes()">Yes</button>
-        <button class="btn" onclick="handleNo()">No</button>
+        <button class="btn no" onclick="handleNo()">No</button>
     </div>
 
     <script>
         function handleYes() {
-            alert("Thank you for your feedback!");
-            // You can add further actions here if needed
+            document.querySelector('.question').innerText = "Would you like to purchase your rental?";
+            document.querySelector('.no').style.display = "inline-block";
+            document.querySelector('.btn').innerText = "Yes";
+            document.querySelector('.btn').onclick = handlePurchase;
         }
 
         function handleNo() {
             alert("We're sorry to hear that. Please provide us with feedback on how we can improve.");
             // You can add further actions here if needed
+        }
+
+        function handlePurchase() {
+            window.open("https://www.regear.arcteryx.com/cart", "_blank");
         }
     </script>
 </body>
