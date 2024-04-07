@@ -3,13 +3,21 @@ import sys
 
 import constants
 
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import TextLoader, DirectoryLoader
 from langchain.indexes import VectorstoreIndexCreator
 
 
+
+
+
 os.environ["OPENAI_API_KEY"] = constants.APIKEY
+
+
 
 
 '''
@@ -31,18 +39,69 @@ loader = TextLoader("data/erasethis.txt")
 # loader = DirectoryLoader("data/")
 index = VectorstoreIndexCreator().from_loaders([loader])
 
-product = ""
+product = " NAME: CONDUIT DOWN JACKET WOMEN'S \n DESC: Outstanding warmth in a versatile, cropped Conduit profile. \n COLOUR: Halogen \n YEAR: 2022 \n SIZE: Large \n CONDITION: EXCELLENT"
 llm = ChatOpenAI()
 
+'''
 if len(sys.argv) > 1:
     product = sys.argv[1]
     query0 = input( '\033[96m'+ "Are you satisfied with renting " + sys.argv[1] + "? (Y/N): " + '\033[0m')
 else:
     product = "YOLA COAT WOMEN'S, GALENA, SIZE XS"
     query0 = input("Are you satisfied with your rental? (Y/N): ")
+    
+'''
+
+
+app = Flask(__name__)
+CORS(app)
+
+'''@app.route('/handle_no', methods=['POST'])
+def handle_no():
+    # Add your Python code here
+    product = " NAME: CONDUIT DOWN JACKET WOMEN'S \n DESC: Outstanding warmth in a versatile, cropped Conduit profile. \n COLOUR: Halogen \n YEAR: 2022 \n SIZE: Large \n CONDITION: EXCELLENT"
+    chatbot1 = {"text": "We're sorry. Mind if we know what could be changed or improved?: "}
+    print(product)
+
+    #print (chatbot1)
+
+    response = jsonify(chatbot1)
+
+    print("Python file executed!")
+    return response
+
+if __name__ == '__main__':
+    app.run(debug=True)'''
+
+@app.route('/feedbackRespond', methods=['POST'])
+def feedbackRespond():
+   # Extract the JSON data from the request
+
+    data = request.get_json()
+    feedbackText = data['feedback']
+
+    query = "The client doesn't like" + product.split("\n")[0].split(":")[1] + " due to: " + feedbackText + ". Is there a product that doesn't have this problem? Recommend a product and give its name, color, size, and link. The last sentence should just be the URL link. If you can't find any, just recommend some similar (but not the same) product.\n"
+    
+    print(query)
+
+    responseText = str(index.query(query, llm))
+    responseTemp = {"text": responseText}
+    print(responseTemp)
+    response = jsonify(responseTemp)
+    print(responseText)
+    print(response)
+    print("Python file executed!")
+
+    # Return a response
+    
+    return response
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 
+'''
 while True:    
     if query0.strip().lower() == 'y':
         query1 = input("Would you like to purchase your product? (Y/N): ")
@@ -54,8 +113,13 @@ while True:
         break
     else:
         query0 = input("Invalid input. Please answer in either 'Y' or 'N': ")
+'''
 
 
+
+
+
+'''
 while True:
     if query1.strip().lower() == 'y':
         print("Thank you! Your product has been added to the cart.\n View cart: https://www.regear.arcteryx.com/cart")
@@ -65,6 +129,7 @@ while True:
         break
     else:
         query1 = input("Invalid input. Please answer in either 'Y' or 'N': ")
+'''
 
 
 while True:
