@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Satisfaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('mountain-background.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            background-color: #fff; /* Increased opacity */
+            padding: 40px; /* Increased padding */
+            border-radius: 10px;
+            max-width: 80%;
+            width: 500px; /* Increased width for better spacing */
+            margin-left: 50px; /* Added margin between container and product container */
+        }
+        .product-info-container {
+            background-color: #fff; /* Increased opacity */
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            margin-right: 50px; /* Added margin between product container and container */
+        }
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1; /* Added to allow flexibility */
+        }
+        .product-image {
+            width: 250px; /* Adjusted width */
+            height: auto;
+            margin-right: 20px;
+        }
+        .product-details {
+            text-align: left;
+            margin-top: 10px; /* Added margin for better spacing */
+        }
+        .question {
+            /* font-family: Arial, sans-serif; */
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #000;
+            font-weight: bold; /* Added font weight */
+        }
+        .btn {
+            padding: 20px 60px;
+            font-size: 22px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #175282;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0a264a;
+        }
+        .btn.no {
+            margin-left: 50px; /* Added margin between Yes and No buttons */
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="arc_main_logo.png" alt="Arc Logo" class="logo">
+    <div class="product-info-container">
+        <img src="halogen-jacket.webp" alt="Halogen Jacket" class="product-image">
+        <div class="product-info">
+            <h2>CONDUIT DOWN JACKET WOMEN'S</h2>
+            <p class="product-details">
+                Outstanding warmth in a versatile, cropped Conduit profile.<br><br>
+                COLOUR: <strong>Halogen</strong><br><br>
+                YEAR: <strong>2022</strong><br><br>
+                SIZE: <strong>L</strong><br><br>
+                CONDITION: <strong>EXCELLENT</strong>
+            </p>
+        </div>
+    </div>
+    <div class="container" id="container">
+        <div class="question">Were you satisfied with your rental?</div><br>
+        <button class="btn" onclick="handleYes()">Yes</button>
+        <button class="btn no" onclick="handleNo()">No</button>
+    </div>
 
+    <script>
+        function handleYes() {
+            document.querySelector('.question').innerText = "Would you like to purchase your rental?";
+            document.querySelector('.no').style.display = "inline-block";
+            document.querySelector('.btn').innerText = "Yes";
+            document.querySelector('.btn').onclick = handlePurchase;
+        }
+
+        function handleNo() {
+            alert("We're sorry to hear that. Please provide us with feedback on how we can improve.");
+            // You can add further actions here if needed
+        }
+
+        function handlePurchase() {
+            window.open("https://www.regear.arcteryx.com/cart", "_blank");
+        }
+    </script>
+</body>
+</html>
