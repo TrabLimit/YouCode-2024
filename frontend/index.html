@@ -60,6 +60,9 @@
             margin-bottom: 20px;
             color: #000;
             font-weight: bold; /* Added font weight */
+            opacity: 1; /* Added initial opacity */
+            display: block; /* Added initial display */
+            transition: opacity s ease;
         }
         .btn {
             padding: 20px 60px;
@@ -108,6 +111,23 @@
         .btn-submit-feedback:hover {
             background-color: #0a264a;
         }
+
+        /* New CSS for fade-in effect */
+        .fade-in {
+            animation: fadeInAnimation ease 1s;
+            animation-fill-mode: forwards;
+            opacity: 0;
+            display: none;
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -140,10 +160,21 @@
 
     <script>
         function handleYes() {
-            document.querySelector('.question').innerText = "Would you like to purchase your rental?";
-            document.querySelector('.no').style.display = "inline-block";
-            document.querySelector('.btn').innerText = "Yes";
-            document.querySelector('.btn').onclick = handlePurchase;
+            // Fade out the current question
+            document.querySelector('.question').style.opacity = 0;
+
+            // After a short delay, show the next question with fade-in effect
+            setTimeout(function() {
+                document.querySelector('.question').innerText = "Would you like to purchase your rental?";
+                document.querySelector('.no').style.display = "inline-block";
+                document.querySelector('.btn').innerText = "Yes";
+                document.querySelector('.btn').onclick = handlePurchase;
+
+                // Apply fade-in effect to the next question
+                document.querySelector('.question').classList.add('fade-in');
+                document.querySelector('.question').style.opacity = 1;
+                document.querySelector('.question').style.display = "block";
+            }, 500); // Adjust delay as needed
         }
 
         function handleNo() {
@@ -178,44 +209,41 @@
                 // Simulated response.text
                 const responseText = data.text;
 
-let urlIndex = responseText.indexOf('https://');
+                let urlIndex = responseText.indexOf('https://');
 
-if (urlIndex !== -1) {
-     // Extract the URL
-     let url = responseText.slice(urlIndex);
-    // Extract the remaining string before the URL
-    let remainingString = responseText.slice(0, urlIndex).trim();
+                if (urlIndex !== -1) {
+                    // Extract the URL
+                    let url = responseText.slice(urlIndex);
+                    // Extract the remaining string before the URL
+                    let remainingString = responseText.slice(0, urlIndex).trim();
 
-    console.log("URL:", url);
-    console.log("Remaining String:", remainingString);
+                    console.log("URL:", url);
+                    console.log("Remaining String:", remainingString);
 
-    // Get a reference to the container element in your HTML
-    const responseContainer = document.getElementById('responseContainer');
-    // Clear the container
-    responseContainer.innerHTML = '';
-    // Create a span element for the remaining string
-    const remainingSpan = document.createElement('span');
-    remainingSpan.innerText = remainingString;
-    // Append the remaining string to the container
-    responseContainer.appendChild(remainingSpan);
-    // Add a line break
-    responseContainer.appendChild(document.createElement('br'));
-    // Create an anchor element for the URL
-    const urlLink = document.createElement('a');
-    urlLink.href = url;
-    urlLink.innerText = url;
-    // Append the URL as a hyperlink to the container
-    responseContainer.appendChild(urlLink);
-} else {
-    console.log("No URL found in the string.");
-    // Get a reference to the container element in your HTML
-    const responseContainer = document.getElementById('responseContainer');
-                // Update the content of the container with the response text
-    responseContainer.innerText = responseText;
-}
-                
-                
-
+                    // Get a reference to the container element in your HTML
+                    const responseContainer = document.getElementById('responseContainer');
+                    // Clear the container
+                    responseContainer.innerHTML = '';
+                    // Create a span element for the remaining string
+                    const remainingSpan = document.createElement('span');
+                    remainingSpan.innerText = remainingString;
+                    // Append the remaining string to the container
+                    responseContainer.appendChild(remainingSpan);
+                    // Add a line break
+                    responseContainer.appendChild(document.createElement('br'));
+                    // Create an anchor element for the URL
+                    const urlLink = document.createElement('a');
+                    urlLink.href = url;
+                    urlLink.innerText = url;
+                    // Append the URL as a hyperlink to the container
+                    responseContainer.appendChild(urlLink);
+                } else {
+                    console.log("No URL found in the string.");
+                    // Get a reference to the container element in your HTML
+                    const responseContainer = document.getElementById('responseContainer');
+                    // Update the content of the container with the response text
+                    responseContainer.innerText = responseText;
+                }
             })
             .catch(error => {
                 console.error('Error submitting feedback:', error);
