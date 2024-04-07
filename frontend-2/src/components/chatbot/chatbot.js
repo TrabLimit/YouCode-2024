@@ -21,6 +21,10 @@ const Chatbot = () => {
         </div>
         <input
           type="text"
+        />
+        response.text
+        <input
+          type="text"
           placeholder="Type your message..."
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
